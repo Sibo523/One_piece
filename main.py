@@ -6,10 +6,10 @@ from selenium.webdriver.chrome.options import Options
 import tkinter as tk
 from tkinter import simpledialog
 
-def get_episode_number():
+def get_episode_number(): #if written 0 then I want to keep watching from where I have stop watching
     root = tk.Tk()
     root.withdraw()
-    episode_number = simpledialog.askinteger("Episode Number", "Enter the episode number you want to start from:", minvalue=1)
+    episode_number = simpledialog.askinteger("Episode Number", "Enter the episode number you want to start from / keep watching with 0:", minvalue=0)
     return episode_number
 
 def anime_shit(ep_num):
@@ -35,11 +35,18 @@ def anime_shit(ep_num):
             pyautogui.click(960, 648)
             pyautogui.press('f')
         if keyboard.is_pressed('esc'):
-            break
+            with open ('C:\helper\ez.txt','w') as file:
+                me+=1
+                file.write(str(me))
+                break
 
 
 def main():
     ep_num = get_episode_number()
+    if ep_num == 0:
+        with open('C:\helper\ez.txt') as file:
+            D = file.read()
+            ep_num = int(D)
     anime_shit(ep_num)
 
 
