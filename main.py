@@ -16,18 +16,16 @@ def anime_shit(ep_num):
     chrome_options = Options()
     browser = webdriver.Chrome(options=chrome_options)
     me = ep_num
-    hello = str(me)
-    browser.get("https://animeisrael.website/watch/fulllink/op/fulllinkop-"+hello+".php")
+    url = "https://animeisrael.website/watch/fulllink/op/fulllinkop-{}.php"
+    browser.get(url.format(str(me))) #formating like a goaty
     browser.fullscreen_window()
 
 
     while True:
         if keyboard.is_pressed('l'):
             me += 1
-            hello = str(me)
-            temp = "https://animeisrael.website/watch/fulllink/op/fulllinkop-" + hello + ".php"
             browser.set_script_timeout(0.5)
-            browser.get(temp)
+            browser.get(url.format(str(me)))
             browser.fullscreen_window()
             time.sleep(2)
             pyautogui.doubleClick(960, 648)
